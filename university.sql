@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `university`.`group` (
   `group_name` VARCHAR(45) NOT NULL,
   `speciality_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`group_name`),
-  INDEX `special_idx` (`speciality_name` ASC) VISIBLE,
+  INDEX `special_idx` (`speciality_name` ASC),
   CONSTRAINT `special`
     FOREIGN KEY (`speciality_name`)
     REFERENCES `university`.`speciality` (`speciality_name`)
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `university`.`student` (
   `student_patronymic` VARCHAR(100) NOT NULL,
   `group_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`student_ticket`),
-  UNIQUE INDEX `student_ticket_UNIQUE` (`student_ticket` ASC) VISIBLE,
-  INDEX `groupn_idx` (`group_name` ASC) VISIBLE,
+  UNIQUE INDEX `student_ticket_UNIQUE` (`student_ticket` ASC),
+  INDEX `groupn_idx` (`group_name` ASC),
   CONSTRAINT `groupn`
     FOREIGN KEY (`group_name`)
     REFERENCES `university`.`group` (`group_name`)
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `university`.`subject` (
   `code` INT NOT NULL AUTO_INCREMENT,
   `subject_name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`code`),
-  UNIQUE INDEX `code_UNIQUE` (`code` ASC) VISIBLE)
+  UNIQUE INDEX `code_UNIQUE` (`code` ASC))
 ENGINE = InnoDB;
 
 
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `university`.`teacher` (
   `teacher_name` VARCHAR(50) NOT NULL,
   `teacher_patronymic` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idteacher`),
-  UNIQUE INDEX `idteacher_UNIQUE` (`idteacher` ASC) VISIBLE)
+  UNIQUE INDEX `idteacher_UNIQUE` (`idteacher` ASC))
 ENGINE = InnoDB;
 
 
@@ -97,10 +97,10 @@ CREATE TABLE IF NOT EXISTS `university`.`timetable` (
   `code` INT NOT NULL,
   `idteacher` INT NOT NULL,
   PRIMARY KEY (`idtimetable`),
-  UNIQUE INDEX `idtimetable_UNIQUE` (`idtimetable` ASC) VISIBLE,
-  INDEX `sub_idx` (`code` ASC) VISIBLE,
-  INDEX `teacher_idx` (`idteacher` ASC) VISIBLE,
-  INDEX `gropname_idx` (`group_name` ASC) VISIBLE,
+  UNIQUE INDEX `idtimetable_UNIQUE` (`idtimetable` ASC),
+  INDEX `sub_idx` (`code` ASC),
+  INDEX `teacher_idx` (`idteacher` ASC),
+  INDEX `gropname_idx` (`group_name` ASC),
   CONSTRAINT `subject`
     FOREIGN KEY (`code`)
     REFERENCES `university`.`subject` (`code`)
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `university`.`users` (
   `users_login` VARCHAR(50) NOT NULL,
   `users_pwd` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idusers`),
-  UNIQUE INDEX `idusers_UNIQUE` (`idusers` ASC) VISIBLE)
+  UNIQUE INDEX `idusers_UNIQUE` (`idusers` ASC))
 ENGINE = InnoDB;
 
 

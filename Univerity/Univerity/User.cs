@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace Univerity
 {
-	public partial class Form1 : Form
+	public partial class User : Form
 	{
-		public Form1()
+		public User()
 		{
 			InitializeComponent();
-		}
-
-		private void button7_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void button2_Click(object sender, EventArgs e)
-		{
-
 		}
 	}
 }
