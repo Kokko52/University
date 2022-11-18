@@ -17,8 +17,25 @@ namespace Univerity
         public Authorization()
         {
             InitializeComponent();
+			comboBox1.Items.Clear();
 			textBox1.PasswordChar = '*';
-        }
+
+			#region Выпадающий список
+			string ConnectionString = "host = localhost; database = university; uid = root; pwd = root; charset = utf8";
+			string query = "SELECT users_name FROM users where users_privilege = \'user\';";
+			MySqlConnection con = new MySqlConnection(ConnectionString);
+			con.Open();
+			MySqlCommand command = new MySqlCommand(query, con);
+
+			MySqlDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				comboBox1.Items.AddRange(new string[] { reader[0].ToString() });
+			}
+			reader.Close();
+			con.Close();
+			#endregion
+		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
@@ -34,16 +51,18 @@ namespace Univerity
 			try
 			{
 				string pr = command.ExecuteScalar().ToString();
+				this.Visible = false;
 				if (pr == "admin")
 				{
-					Admin form = new Admin();
+					Menu form = new Menu(true);
 					form.ShowDialog();
 				}
 				if (pr == "user")
 				{
-					User form = new User();
+
+					Menu form = new Menu(false);
+					//form.Size = new Size(250, 200);
 					form.ShowDialog();
-					button2.Visible = false;
 				}
 				else if (pr != "admin" && pr != "user")
 				{
@@ -64,6 +83,5 @@ namespace Univerity
 		{
 			this.Close();
 		}
-
     }
 }

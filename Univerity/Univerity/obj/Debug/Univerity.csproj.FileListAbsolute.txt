@@ -6,7 +6,6 @@ D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.csproj.GenerateResourc
 D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.exe
 D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.pdb
 D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.csprojResolveAssemblyReference.cache
-D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.User.resources
 D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.Authorization.resources
-D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.Admin.resources
 D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.Work_users.resources
+D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.Menu.resources
