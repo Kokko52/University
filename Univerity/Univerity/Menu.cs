@@ -26,7 +26,8 @@ namespace Univerity
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-
+			Rm_info form = new Rm_info();
+			form.ShowDialog();
 		}
 
 		private void button6_Click(object sender, EventArgs e)
@@ -70,6 +71,12 @@ namespace Univerity
 				button6.Visible = true;
 				button7.Visible = true;
 			}
+		}
+
+		private void button3_Click(object sender, EventArgs e)
+		{
+			Add_info form = new Add_info();
+			form.ShowDialog();
 		}
 	}
 

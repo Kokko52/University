@@ -48,7 +48,7 @@
 			// 
 			// button2
 			// 
-			this.button2.Location = new System.Drawing.Point(69, 157);
+			this.button2.Location = new System.Drawing.Point(69, 217);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(234, 48);
 			this.button2.TabIndex = 1;
@@ -86,16 +86,17 @@
 			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(69, 284);
+			this.button3.Location = new System.Drawing.Point(69, 158);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(234, 44);
 			this.button3.TabIndex = 7;
 			this.button3.Text = "Добавление информации";
 			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
 			// button7
 			// 
-			this.button7.Location = new System.Drawing.Point(69, 221);
+			this.button7.Location = new System.Drawing.Point(69, 283);
 			this.button7.Name = "button7";
 			this.button7.Size = new System.Drawing.Size(234, 46);
 			this.button7.TabIndex = 8;

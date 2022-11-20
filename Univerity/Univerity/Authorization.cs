@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace Univerity
 {
@@ -54,8 +55,12 @@ namespace Univerity
 				this.Visible = false;
 				if (pr == "admin")
 				{
+					admin.usr = user;
+					admin.pwd = pwd;
 					Menu form = new Menu(true);
 					form.ShowDialog();
+				//Work_users form1 = new Work_users();
+				//form1.textBox10.Text = "dfsdfsdfsfs";
 				}
 				if (pr == "user")
 				{

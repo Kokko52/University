@@ -31,6 +31,8 @@
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.label10 = new System.Windows.Forms.Label();
+			this.textBox10 = new System.Windows.Forms.TextBox();
 			this.button4 = new System.Windows.Forms.Button();
 			this.textBox4 = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
@@ -42,6 +44,7 @@
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.button1 = new System.Windows.Forms.Button();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
+			this.button5 = new System.Windows.Forms.Button();
 			this.textBox9 = new System.Windows.Forms.TextBox();
 			this.label9 = new System.Windows.Forms.Label();
 			this.textBox5 = new System.Windows.Forms.TextBox();
@@ -54,11 +57,8 @@
 			this.textBox8 = new System.Windows.Forms.TextBox();
 			this.button2 = new System.Windows.Forms.Button();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
-			this.button3 = new System.Windows.Forms.Button();
-			this.label10 = new System.Windows.Forms.Label();
-			this.textBox10 = new System.Windows.Forms.TextBox();
-			this.button5 = new System.Windows.Forms.Button();
 			this.button6 = new System.Windows.Forms.Button();
+			this.button3 = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
@@ -111,6 +111,22 @@
 			this.tabPage1.TabIndex = 0;
 			this.tabPage1.Text = "Добавление";
 			this.tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// label10
+			// 
+			this.label10.AutoSize = true;
+			this.label10.Location = new System.Drawing.Point(17, 20);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(41, 13);
+			this.label10.TabIndex = 11;
+			this.label10.Text = "id_user";
+			// 
+			// textBox10
+			// 
+			this.textBox10.Location = new System.Drawing.Point(89, 17);
+			this.textBox10.Name = "textBox10";
+			this.textBox10.Size = new System.Drawing.Size(100, 20);
+			this.textBox10.TabIndex = 10;
 			// 
 			// button4
 			// 
@@ -219,6 +235,16 @@
 			this.tabPage2.Text = "Редактирование";
 			this.tabPage2.UseVisualStyleBackColor = true;
 			// 
+			// button5
+			// 
+			this.button5.Location = new System.Drawing.Point(442, 6);
+			this.button5.Name = "button5";
+			this.button5.Size = new System.Drawing.Size(98, 40);
+			this.button5.TabIndex = 19;
+			this.button5.Text = "Изменить";
+			this.button5.UseVisualStyleBackColor = true;
+			this.button5.Click += new System.EventHandler(this.button5_Click);
+			// 
 			// textBox9
 			// 
 			this.textBox9.Location = new System.Drawing.Point(95, 17);
@@ -321,42 +347,6 @@
 			this.tabPage3.Text = "Удаление";
 			this.tabPage3.UseVisualStyleBackColor = true;
 			// 
-			// button3
-			// 
-			this.button3.Location = new System.Drawing.Point(442, 82);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(98, 40);
-			this.button3.TabIndex = 1;
-			this.button3.Text = "Выход";
-			this.button3.UseVisualStyleBackColor = true;
-			this.button3.Click += new System.EventHandler(this.button3_Click);
-			// 
-			// label10
-			// 
-			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(17, 20);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(41, 13);
-			this.label10.TabIndex = 11;
-			this.label10.Text = "id_user";
-			// 
-			// textBox10
-			// 
-			this.textBox10.Location = new System.Drawing.Point(89, 17);
-			this.textBox10.Name = "textBox10";
-			this.textBox10.Size = new System.Drawing.Size(100, 20);
-			this.textBox10.TabIndex = 10;
-			// 
-			// button5
-			// 
-			this.button5.Location = new System.Drawing.Point(442, 6);
-			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(98, 40);
-			this.button5.TabIndex = 19;
-			this.button5.Text = "Изменить";
-			this.button5.UseVisualStyleBackColor = true;
-			this.button5.Click += new System.EventHandler(this.button5_Click);
-			// 
 			// button6
 			// 
 			this.button6.Location = new System.Drawing.Point(442, 6);
@@ -367,6 +357,16 @@
 			this.button6.UseVisualStyleBackColor = true;
 			this.button6.Click += new System.EventHandler(this.button6_Click);
 			// 
+			// button3
+			// 
+			this.button3.Location = new System.Drawing.Point(442, 82);
+			this.button3.Name = "button3";
+			this.button3.Size = new System.Drawing.Size(98, 40);
+			this.button3.TabIndex = 1;
+			this.button3.Text = "Выход";
+			this.button3.UseVisualStyleBackColor = true;
+			this.button3.Click += new System.EventHandler(this.button3_Click);
+			// 
 			// Work_users
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -376,6 +376,7 @@
 			this.Controls.Add(this.dataGridView1);
 			this.Name = "Work_users";
 			this.Text = "Работа с пользователями";
+			this.Load += new System.EventHandler(this.Work_users_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.tabControl1.ResumeLayout(false);
 			this.tabPage1.ResumeLayout(false);
