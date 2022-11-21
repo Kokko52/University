@@ -75,6 +75,18 @@
     <Compile Include="Rm_info.Designer.cs">
       <DependentUpon>Rm_info.cs</DependentUpon>
     </Compile>
+    <Compile Include="Service.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Service.Designer.cs">
+      <DependentUpon>Service.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View_Service.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View_Service.Designer.cs">
+      <DependentUpon>View_Service.cs</DependentUpon>
+    </Compile>
     <Compile Include="Work_users.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +114,12 @@
     </Compile>
     <EmbeddedResource Include="Rm_info.resx">
       <DependentUpon>Rm_info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Service.resx">
+      <DependentUpon>Service.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View_Service.resx">
+      <DependentUpon>View_Service.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Work_users.resx">
       <DependentUpon>Work_users.cs</DependentUpon>

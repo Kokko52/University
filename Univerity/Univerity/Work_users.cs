@@ -19,7 +19,10 @@ namespace Univerity
 			InitializeComponent();
 			LoadDate();
 			dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-			dataGridView1.DefaultCellStyle.SelectionBackColor = Color.BlueViolet;
+			dataGridView1.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
+			comboBox1.Items.AddRange(new string[] {"user"});
+			comboBox1.Items.AddRange(new string[] { "admin" });
+		
 		}
 
 		#region Добавление
@@ -31,15 +34,15 @@ namespace Univerity
 				string fio = textBox1.Text;
 				string login = textBox2.Text;
 				string pwd = textBox3.Text;
-				string priv = textBox4.Text;
+				string priv = comboBox1.Text;
 				if(priv != "user" && priv != "admin")
 				{
 					MessageBox.Show("Не ккоректный ввод поля \"Привилегия\"! ", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 				else
 				{
-					string ConnectionString = "host = localhost;database = university; uid = root; pwd = root;charset = utf8";
-					string query = String.Format("INSERT INTO users(idusers, users_name, users_login, users_pwd, users_privilege) VALUES({0}, '{1}', '{2}', '{3}', '{4}');", idusers, fio, login, pwd, priv);
+					string ConnectionString = "host = localhost;database = mydb_kokurin; uid = root; pwd = root;charset = utf8";
+					string query = String.Format("INSERT INTO users(id_usr, name_usr, login_usr, pwd_usr, users_privilege) VALUES({0}, '{1}', '{2}', '{3}', '{4}');", idusers, fio, login, pwd, priv);
 					MySqlConnection connection = new MySqlConnection(ConnectionString);
 					connection.Open();
 
@@ -49,7 +52,7 @@ namespace Univerity
 					textBox1.Text = "";
 					textBox2.Text = "";
 					textBox3.Text = "";
-					textBox4.Text = "";
+					comboBox1.Text = "";
 					textBox10.Text = "";
 					connection.Close();
 				}
@@ -111,7 +114,7 @@ namespace Univerity
 				string primaryKey_pwd = dataGridView1.Rows[rowIndex_pwd].Cells[3].Value.ToString(); // первичный ключ по которому будем обновлять
 				pwd = primaryKey;
 			}
-			string priv = textBox5.Text;
+			string priv = comboBox2.Text;
 			if (priv == "")
 			{
 				int rowIndex_priv = dataGridView1.CurrentCell.RowIndex; // номер выбраной строки в datagridview
@@ -124,8 +127,8 @@ namespace Univerity
 			}
 			else
 			{
-				string connectionString = "host = localhost; database = university; uid = root; pwd = root; charset = utf8";
-				string query = "UPDATE users SET idusers =" + id + ", users_name = '" + name + "', users_login = '" + login + "', users_pwd = '" + pwd + "', users_privilege = '" + priv + "' WHERE idusers = '" + primaryKey + "';";
+				string connectionString = "host = localhost; database = mydb_kokurin; uid = root; pwd = root; charset = utf8";
+				string query = "UPDATE users SET id_usr =" + id + ", name_usr = '" + name + "', login_usr = '" + login + "', pwd_usr = '" + pwd + "', users_privilege = '" + priv + "' WHERE idusers = '" + primaryKey + "';";
 				MessageBox.Show("Id  ='" + id + "'\nИмя пользователя = '" + name + "'\nЛогин = '" + login + "'\nПароль = '" + pwd + "'\nПривилегия = '" + priv + "'.", "Отредактировано");
 				MySqlConnection con = new MySqlConnection(connectionString);
 
@@ -137,7 +140,7 @@ namespace Univerity
 				textBox8.Text = "";
 				textBox7.Text = "";
 				textBox6.Text = "";
-				textBox5.Text = "";
+				comboBox2.Text = "";
 				LoadDate();
 				con.Close();
 			}
@@ -161,8 +164,8 @@ namespace Univerity
 				rowIndex = dataGridView1.CurrentCell.RowIndex; // номер выбраной строки в datagridview
 				primaryKey = dataGridView1.Rows[rowIndex].Cells[0].Value.ToString(); // первичный ключ по которому будем обновлять
 
-				string ConnectionString = "host = localhost; database = university; uid = root; pwd = root; charset = utf8";
-				string query = "DELETE FROM users WHERE idusers =" + primaryKey + ";";
+				string ConnectionString = "host = localhost; database = mydb_kokurin; uid = root; pwd = root; charset = utf8";
+				string query = "DELETE FROM users WHERE id_usr =" + primaryKey + ";";
 				MySqlConnection con = new MySqlConnection(ConnectionString);
 				con.Open();
 				MySqlCommand com = new MySqlCommand(query, con);
@@ -177,16 +180,15 @@ namespace Univerity
 
 		void LoadDate()
 		{
-			string ConnectionString = "host =localhost; database = university; uid = root;pwd = root;charset = utf8";
+			string ConnectionString = "host =localhost; database = mydb_kokurin; uid = root;pwd = root;charset = utf8";
 			MySqlConnection connection = new MySqlConnection(ConnectionString);
 			connection.Open();
-			string query = "SELECT * FROM users";
+			string query = "SELECT id_usr AS 'ID', name_usr AS 'ФИО', login_usr AS 'Логин', pwd_usr AS 'Пароль' FROM users";
 			MySqlCommand command = new MySqlCommand(query, connection);
 			MySqlDataAdapter da = new MySqlDataAdapter(command);
 			DataTable table = new DataTable();
 			da.Fill(table);
 			dataGridView1.DataSource = table;
-
 			#region Запрет на изменение
 			dataGridView1.AllowUserToAddRows = false;
 			dataGridView1.AllowUserToDeleteRows = false;
@@ -199,17 +201,23 @@ namespace Univerity
 		#region Выход с функции
 		private void button1_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			Hide();
+			Menu form = new Menu(true);
+			form.ShowDialog();
 		}
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			Hide();
+			Menu form = new Menu(true);
+			form.ShowDialog();
 		}
 
 		private void button3_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			Hide();
+			Menu form = new Menu(true);
+			form.ShowDialog();
 		}
 		#endregion
 
@@ -223,8 +231,40 @@ namespace Univerity
 
 		}
 
-		
+		private void tabPage1_Click(object sender, EventArgs e)
+		{
 
+		}
+
+		private void label11_Click(object sender, EventArgs e)
+		{
+			textBox2.Text = "";
+			int[] ans = new int[7];
+			string pwd = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_-!#$%&*+,-./:;<=>?@\\";
+			Random rnd = new Random();
+			int j = rnd.Next(8, 15);
+			for(int i = 0; i <= j; ++i)
+			{
+				textBox2.Text += pwd[rnd.Next(pwd.Length)];
+			}
+		}
+		private void label12_Click_1(object sender, EventArgs e)
+		{
+			textBox7.Text = "";
+			int[] ans = new int[7];
+			string pwd = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_-!#$%&*+,-./:;<=>?@\\";
+			Random rnd = new Random();
+			int j = rnd.Next(8, 15);
+			for (int i = 0; i <= j; ++i)
+			{
+				textBox7.Text += pwd[rnd.Next(pwd.Length)];
+			}
+		}
+
+		private void textBox7_TextChanged(object sender, EventArgs e)
+		{
+
+		}
 		
 	}
 	public static class admin

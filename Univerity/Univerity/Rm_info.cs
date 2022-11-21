@@ -18,16 +18,50 @@ namespace Univerity
 		public Rm_info()
 		{
 			InitializeComponent();
-			LoadDate("mydb_kokurin.group");
+			string rus = "group_name AS 'Группа', code AS 'Специальность'";
+			LoadDate("mydb_kokurin.group", rus);
 			dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-			dataGridView1.DefaultCellStyle.SelectionBackColor = Color.BlueViolet;
+			dataGridView1.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
+
+
+			#region Выпадающий список ГРУППЫ
+			string ConnectionString2 = "host = localhost; database = mydb_kokurin; uid = root; pwd = root; charset = utf8";
+			string query2 = "SELECT group_name FROM mydb_kokurin.group;";
+			MySqlConnection con2 = new MySqlConnection(ConnectionString2);
+			con2.Open();
+			MySqlCommand command2 = new MySqlCommand(query2, con2);
+
+			MySqlDataReader reader2 = command2.ExecuteReader();
+			while (reader2.Read())
+			{
+				comboBox2.Items.AddRange(new string[] { reader2[0].ToString() });
+			}
+			reader2.Close();
+			con2.Close();
+			#endregion
+
+			#region Выпадающий список СПЕЦИАЛЬНОСТИ
+			string ConnectionString = "host = localhost; database = mydb_kokurin; uid = root; pwd = root; charset = utf8";
+			string query = "SELECT code FROM speciality;";
+			MySqlConnection con = new MySqlConnection(ConnectionString);
+			con.Open();
+			MySqlCommand command = new MySqlCommand(query, con);
+
+			MySqlDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				comboBox1.Items.AddRange(new string[] { reader[0].ToString() });
+			}
+			reader.Close();
+			con.Close();
+			#endregion
 		}
-		void LoadDate(string str)
+		void LoadDate(string str, string rus)
 		{
 			string ConnectionString = "host =localhost; database = mydb_kokurin; uid = root;pwd = root;charset = utf8";
 			MySqlConnection connection = new MySqlConnection(ConnectionString);
 			connection.Open();
-			string query = "SELECT * FROM " + str + ";";
+			string query = "SELECT " + rus + " FROM " + str + ";";
 			MySqlCommand command = new MySqlCommand(query, connection);
 			MySqlDataAdapter da = new MySqlDataAdapter(command);
 			DataTable table = new DataTable();
@@ -51,7 +85,7 @@ namespace Univerity
 				string primaryKey = dataGridView1.Rows[rowIndex].Cells[0].Value.ToString(); // первичный ключ по которому будем обновлять
 
 				string name = textBox1.Text;
-				string spec = textBox2.Text;
+				string spec = comboBox1.Text;
 				string ConnectingString = "host = localhost; database = mydb_kokurin; uid = root; pwd = root; charset = utf8";
 				string query = "UPDATE mydb_kokurin.group SET group_name ='" + name + "', code ='" + spec + "'  WHERE group_name ='" + primaryKey + "';";
 				MySqlConnection con = new MySqlConnection(ConnectingString);
@@ -62,9 +96,10 @@ namespace Univerity
 				MessageBox.Show("Отредактированно " + res.ToString(), "Внимание!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
 				textBox1.Text = "";
-				textBox2.Text = "";
+				comboBox2.Text = "";
 				con.Close();
-				LoadDate(" mydb_kokurin.group");
+				string rus = "group_name AS 'Группа, code AS 'Специальность'";
+				LoadDate(" mydb_kokurin.group", rus);
 			}
 
 		}
@@ -75,11 +110,11 @@ namespace Univerity
 		}
 		private void change_tab(object sender, EventArgs e)
 		{
-			if (tabControl1.SelectedIndex == 0) LoadDate("mydb_kokurin.group");
-			if (tabControl1.SelectedIndex == 1) LoadDate("student");
-			if (tabControl1.SelectedIndex == 2) LoadDate("subject");
-			if (tabControl1.SelectedIndex == 3) LoadDate("teacher");
-			if (tabControl1.SelectedIndex == 4) LoadDate("speciality");
+			if (tabControl1.SelectedIndex == 0) { string rus = "group_name AS 'Группа', code AS 'Специальность'";LoadDate("mydb_kokurin.group", rus); }
+			if (tabControl1.SelectedIndex == 1) { string rus = "student_tk AS 'Студ. билет', st_surname AS 'Фамилия', st_name AS 'Имя', st_pt AS 'Отчество'"; LoadDate("student", rus); }
+			if (tabControl1.SelectedIndex == 2) { string rus = "code 'ID', sub_name AS 'Название предмета'"; LoadDate("subject", rus); }
+			if (tabControl1.SelectedIndex == 3) { string rus = "id_tc AS 'ID', tc_surname AS 'Фамилия', tc_name AS 'Имя', tc_pt AS 'Отчество'"; LoadDate("teacher", rus); }
+			if (tabControl1.SelectedIndex == 4) { string rus = "code 'ID', spec_name AS 'Специальность'"; LoadDate("speciality", rus); }
 		}
 		
 
@@ -94,7 +129,7 @@ namespace Univerity
 				string surname = textBox4.Text;
 				string name = textBox5.Text;
 				string otch = textBox6.Text;
-				string gr = textBox14.Text;
+				string gr = comboBox2.Text;
 
 				string ConnectingString = "host = localhost; database = mydb_kokurin; uid = root; pwd = root; charset = utf8";
 				string query = "UPDATE student SET student_tk ='" + zach + "', st_surname ='" + surname + "', st_name ='" + name + "', st_pt ='" + otch + "', group_name ='" + gr + "'  WHERE student_tk ='" + primaryKey + "';";
@@ -106,7 +141,8 @@ namespace Univerity
 
 				textBox1.Text = "";
 				con.Close();
-				LoadDate("student");
+				string rus = "student_tk AS 'Студ. билет', st_surname AS 'Фамилия', st_name AS 'Имя', st_pt AS 'Отчество'";
+				LoadDate("student", rus);
 			}
 		}
 
@@ -131,7 +167,8 @@ namespace Univerity
 
 				textBox1.Text = "";
 				con.Close();
-				LoadDate("subject");
+				string rus = "code 'ID', sub_name AS 'Название предмета'";
+				LoadDate("subject", rus);
 			}
 		}
 
@@ -157,34 +194,45 @@ namespace Univerity
 
 				textBox1.Text = "";
 				con.Close();
-				LoadDate("teacher");
+				string rus = "id_tc AS 'ID', tc_surname AS 'Фамилия', tc_name AS 'Имя', tc_pt AS 'Отчество'";
+				LoadDate("teacher", rus);
 			}
 		}
 
 		#region ВЫХОД
 		private void button2_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			Hide();
+			Menu form = new Menu(true);
+			form.ShowDialog();
 		}
 
 		private void button5_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			Hide();
+			Menu form = new Menu(true);
+			form.ShowDialog();
 		}
 
 		private void button7_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			Hide();
+			Menu form = new Menu(true);
+			form.ShowDialog();
 		}
 
 		private void button9_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			Hide();
+			Menu form = new Menu(true);
+			form.ShowDialog();
 		}
 
 		private void button14_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			Hide();
+			Menu form = new Menu(true);
+			form.ShowDialog();
 		}
 		#endregion
 
@@ -203,7 +251,8 @@ namespace Univerity
 			int res = command.ExecuteNonQuery();
 			MessageBox.Show("Удалено" + res.ToString(), "Внимание!", MessageBoxButtons.OK);
 			con.Close();
-			LoadDate("mydb_kokurin.group");
+			string rus = "student_tk AS 'Студ. билет', st_surname AS 'Фамилия', st_name AS 'Имя', st_pt AS 'Отчество'";
+			LoadDate("mydb_kokurin.group", rus);
 			}
 		}
 
@@ -222,7 +271,8 @@ namespace Univerity
 				int res = command.ExecuteNonQuery();
 				MessageBox.Show("Удалено" + res.ToString(), "Внимание!", MessageBoxButtons.OK);
 				con.Close();
-				LoadDate("student");
+				string rus = "student_tk AS 'Студ. билет', st_surname AS 'Фамилия', st_name AS 'Имя', st_pt AS 'Отчество'";
+				LoadDate("student", rus);
 			}
 		}
 
@@ -245,9 +295,10 @@ namespace Univerity
 				MessageBox.Show("Отредактированно " + res.ToString(), "Внимание!!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
 				textBox1.Text = "";
-				textBox2.Text = "";
+				comboBox2.Text = "";
 				con.Close();
-				LoadDate("mydb_kokurin");
+				string rus = "code 'ID', spec_name AS 'Специальность'";
+				LoadDate("mydb_kokurin", rus);
 			}
 		}
 
@@ -266,7 +317,8 @@ namespace Univerity
 				int res = command.ExecuteNonQuery();
 				MessageBox.Show("Удалено" + res.ToString(), "Внимание!", MessageBoxButtons.OK);
 				con.Close();
-				LoadDate("speciality");
+				string rus = "code 'ID', spec_name AS 'Специальность'";
+				LoadDate("speciality", rus);
 			}
 		}
 
@@ -285,7 +337,8 @@ namespace Univerity
 				int res = command.ExecuteNonQuery();
 				MessageBox.Show("Удалено" + res.ToString(), "Внимание!", MessageBoxButtons.OK);
 				con.Close();
-				LoadDate("subject");
+				string rus = "code 'ID', sub_name AS 'Название предмета'";
+				LoadDate("subject", rus);
 			}
 		}
 
@@ -304,7 +357,8 @@ namespace Univerity
 				int res = command.ExecuteNonQuery();
 				MessageBox.Show("Удалено" + res.ToString(), "Внимание!", MessageBoxButtons.OK);
 				con.Close();
-				LoadDate("teacher");
+				string rus = "id_tc AS 'ID', tc_surname AS 'Фамилия', tc_name AS 'Имя', tc_pt AS 'Отчество'";
+				LoadDate("teacher", rus);
 			}
 		}
 

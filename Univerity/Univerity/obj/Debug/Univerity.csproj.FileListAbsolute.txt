@@ -10,4 +10,6 @@ D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.Work_users.resources
 D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.Menu.resources
 D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.Add_info.resources
 D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.Rm_info.resources
+D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.Service.resources
 D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.csprojResolveAssemblyReference.cache
+D:\1 неделя\Univerity\Univerity\obj\Debug\Univerity.View_Service.resources

@@ -26,17 +26,19 @@ namespace Univerity
 
 		private void button2_Click(object sender, EventArgs e)
 		{
+			Hide();
 			Rm_info form = new Rm_info();
 			form.ShowDialog();
 		}
 
 		private void button6_Click(object sender, EventArgs e)
 		{
-			this.Close();
+			Application.Exit();
 		}
 
 		private void button7_Click_1(object sender, EventArgs e)
 		{
+			Hide();
 			Work_users form = new Work_users();
 			form.ShowDialog();
 		}
@@ -75,7 +77,21 @@ namespace Univerity
 
 		private void button3_Click(object sender, EventArgs e)
 		{
+			Hide();
 			Add_info form = new Add_info();
+			form.ShowDialog();
+
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			Service form = new Service();
+			form.ShowDialog();
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			View_Service form = new View_Service();
 			form.ShowDialog();
 		}
 	}

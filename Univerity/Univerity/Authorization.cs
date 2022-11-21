@@ -88,5 +88,10 @@ namespace Univerity
 		{
 			this.Close();
 		}
+
+		private void Authorization_Load(object sender, EventArgs e)
+		{
+
+		}
     }
 }
